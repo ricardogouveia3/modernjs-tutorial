@@ -1,5 +1,11 @@
 import { List } from 'antd';
-import Avatar from '../components/Avatar';
+
+import 'tailwindcss/base.css';
+import 'tailwindcss/components.css';
+import 'tailwindcss/utilities.css';
+import '../styles/utils.css';
+
+import Item from '../components/Item';
 
 const getAvatar = (users: Array<{ name: string; email: string }>) =>
   users.map(user => ({
@@ -14,23 +20,15 @@ const mockData = getAvatar([
   { name: 'Davis', email: '"t.kqkoj@utlkwnpwk.nu' },
 ]);
 
-function App() {
+function Index() {
   return (
-    <div>
+    <div className="container lg mx-auto">
       <List
         dataSource={mockData}
-        renderItem={({ name, email, avatar }) => (
-          <List.Item key={name}>
-            <List.Item.Meta
-              avatar={<Avatar src={avatar} />}
-              title={name}
-              description={email}
-            />
-          </List.Item>
-        )}
+        renderItem={info => <Item key={info.name} info={info} />}
       />
     </div>
   );
 }
 
-export default App;
+export default Index;

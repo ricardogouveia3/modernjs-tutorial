@@ -1,29 +1,19 @@
-import { List } from 'antd';
-
+import Item from '@/components/Item';
 import { Helmet } from '@modern-js/runtime/head';
-import Item from '../components/Item';
-
-const getAvatar = (users: Array<{ name: string; email: string }>) =>
-  users.map(user => ({
-    ...user,
-    avatar: `https://api.dicebear.com/7.x/pixel-art/svg?seed=${user.name}`,
-  }));
-
-const mockData = getAvatar([
-  { name: 'Thomas', email: 'w.kccip@bllmfbgv.dm' },
-  { name: 'Chow', email: 'f.lfqljnlk@ywoefljhc.af' },
-  { name: 'Bradley', email: 'd.wfovsqyo@gpkcjwjgb.fr' },
-  { name: 'Davis', email: '"t.kqkoj@utlkwnpwk.nu' },
-]);
+import { useLoaderData } from '@modern-js/runtime/router';
+import { List } from 'antd';
+import type { LoaderData } from './page.data';
 
 function Index() {
+  const { data } = useLoaderData() as LoaderData;
+
   return (
     <div className="container lg mx-auto">
       <Helmet>
         <title>All</title>
       </Helmet>
       <List
-        dataSource={mockData}
+        dataSource={data}
         renderItem={info => <Item key={info.name} info={info} />}
       />
     </div>
